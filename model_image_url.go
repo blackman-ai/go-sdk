@@ -16,86 +16,103 @@ import (
 	"fmt"
 )
 
-// checks if the Message type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Message{}
+// checks if the ImageUrl type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ImageUrl{}
 
-// Message struct for Message
-type Message struct {
-	Content MessageContent `json:"content"`
-	// \"user\", \"assistant\", \"system\"
-	Role string `json:"role"`
+// ImageUrl struct for ImageUrl
+type ImageUrl struct {
+	// Optional detail level: \"auto\", \"low\", or \"high\"
+	Detail NullableString `json:"detail,omitempty"`
+	Url string `json:"url"`
 }
 
-type _Message Message
+type _ImageUrl ImageUrl
 
-// NewMessage instantiates a new Message object
+// NewImageUrl instantiates a new ImageUrl object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMessage(content MessageContent, role string) *Message {
-	this := Message{}
-	this.Content = content
-	this.Role = role
+func NewImageUrl(url string) *ImageUrl {
+	this := ImageUrl{}
+	this.Url = url
 	return &this
 }
 
-// NewMessageWithDefaults instantiates a new Message object
+// NewImageUrlWithDefaults instantiates a new ImageUrl object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMessageWithDefaults() *Message {
-	this := Message{}
+func NewImageUrlWithDefaults() *ImageUrl {
+	this := ImageUrl{}
 	return &this
 }
 
-// GetContent returns the Content field value
-func (o *Message) GetContent() MessageContent {
-	if o == nil {
-		var ret MessageContent
+// GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ImageUrl) GetDetail() string {
+	if o == nil || IsNil(o.Detail.Get()) {
+		var ret string
 		return ret
 	}
-
-	return o.Content
+	return *o.Detail.Get()
 }
 
-// GetContentOk returns a tuple with the Content field value
+// GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Message) GetContentOk() (*MessageContent, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageUrl) GetDetailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Content, true
+	return o.Detail.Get(), o.Detail.IsSet()
 }
 
-// SetContent sets field value
-func (o *Message) SetContent(v MessageContent) {
-	o.Content = v
+// HasDetail returns a boolean if a field has been set.
+func (o *ImageUrl) HasDetail() bool {
+	if o != nil && o.Detail.IsSet() {
+		return true
+	}
+
+	return false
 }
 
-// GetRole returns the Role field value
-func (o *Message) GetRole() string {
+// SetDetail gets a reference to the given NullableString and assigns it to the Detail field.
+func (o *ImageUrl) SetDetail(v string) {
+	o.Detail.Set(&v)
+}
+// SetDetailNil sets the value for Detail to be an explicit nil
+func (o *ImageUrl) SetDetailNil() {
+	o.Detail.Set(nil)
+}
+
+// UnsetDetail ensures that no value is present for Detail, not even an explicit nil
+func (o *ImageUrl) UnsetDetail() {
+	o.Detail.Unset()
+}
+
+// GetUrl returns the Url field value
+func (o *ImageUrl) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Role
+	return o.Url
 }
 
-// GetRoleOk returns a tuple with the Role field value
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *Message) GetRoleOk() (*string, bool) {
+func (o *ImageUrl) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Role, true
+	return &o.Url, true
 }
 
-// SetRole sets field value
-func (o *Message) SetRole(v string) {
-	o.Role = v
+// SetUrl sets field value
+func (o *ImageUrl) SetUrl(v string) {
+	o.Url = v
 }
 
-func (o Message) MarshalJSON() ([]byte, error) {
+func (o ImageUrl) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,20 +120,21 @@ func (o Message) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Message) ToMap() (map[string]interface{}, error) {
+func (o ImageUrl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["content"] = o.Content
-	toSerialize["role"] = o.Role
+	if o.Detail.IsSet() {
+		toSerialize["detail"] = o.Detail.Get()
+	}
+	toSerialize["url"] = o.Url
 	return toSerialize, nil
 }
 
-func (o *Message) UnmarshalJSON(data []byte) (err error) {
+func (o *ImageUrl) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"content",
-		"role",
+		"url",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -133,53 +151,53 @@ func (o *Message) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varMessage := _Message{}
+	varImageUrl := _ImageUrl{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMessage)
+	err = decoder.Decode(&varImageUrl)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Message(varMessage)
+	*o = ImageUrl(varImageUrl)
 
 	return err
 }
 
-type NullableMessage struct {
-	value *Message
+type NullableImageUrl struct {
+	value *ImageUrl
 	isSet bool
 }
 
-func (v NullableMessage) Get() *Message {
+func (v NullableImageUrl) Get() *ImageUrl {
 	return v.value
 }
 
-func (v *NullableMessage) Set(val *Message) {
+func (v *NullableImageUrl) Set(val *ImageUrl) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMessage) IsSet() bool {
+func (v NullableImageUrl) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMessage) Unset() {
+func (v *NullableImageUrl) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMessage(val *Message) *NullableMessage {
-	return &NullableMessage{value: val, isSet: true}
+func NewNullableImageUrl(val *ImageUrl) *NullableImageUrl {
+	return &NullableImageUrl{value: val, isSet: true}
 }
 
-func (v NullableMessage) MarshalJSON() ([]byte, error) {
+func (v NullableImageUrl) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMessage) UnmarshalJSON(src []byte) error {
+func (v *NullableImageUrl) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

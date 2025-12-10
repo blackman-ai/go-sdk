@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Content** | **string** |  | 
+**Content** | [**MessageContent**](MessageContent.md) |  | 
 **Role** | **string** | \&quot;user\&quot;, \&quot;assistant\&quot;, \&quot;system\&quot; | 
 
 ## Methods
 
 ### NewMessage
 
-`func NewMessage(content string, role string, ) *Message`
+`func NewMessage(content MessageContent, role string, ) *Message`
 
 NewMessage instantiates a new Message object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetContent
 
-`func (o *Message) GetContent() string`
+`func (o *Message) GetContent() MessageContent`
 
 GetContent returns the Content field if non-nil, zero value otherwise.
 
 ### GetContentOk
 
-`func (o *Message) GetContentOk() (*string, bool)`
+`func (o *Message) GetContentOk() (*MessageContent, bool)`
 
 GetContentOk returns a tuple with the Content field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContent
 
-`func (o *Message) SetContent(v string)`
+`func (o *Message) SetContent(v MessageContent)`
 
 SetContent sets Content field to given value.
 

@@ -16,86 +16,85 @@ import (
 	"fmt"
 )
 
-// checks if the Message type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Message{}
+// checks if the ContentPartOneOf type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ContentPartOneOf{}
 
-// Message struct for Message
-type Message struct {
-	Content MessageContent `json:"content"`
-	// \"user\", \"assistant\", \"system\"
-	Role string `json:"role"`
+// ContentPartOneOf struct for ContentPartOneOf
+type ContentPartOneOf struct {
+	Text string `json:"text"`
+	Type string `json:"type"`
 }
 
-type _Message Message
+type _ContentPartOneOf ContentPartOneOf
 
-// NewMessage instantiates a new Message object
+// NewContentPartOneOf instantiates a new ContentPartOneOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMessage(content MessageContent, role string) *Message {
-	this := Message{}
-	this.Content = content
-	this.Role = role
+func NewContentPartOneOf(text string, type_ string) *ContentPartOneOf {
+	this := ContentPartOneOf{}
+	this.Text = text
+	this.Type = type_
 	return &this
 }
 
-// NewMessageWithDefaults instantiates a new Message object
+// NewContentPartOneOfWithDefaults instantiates a new ContentPartOneOf object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMessageWithDefaults() *Message {
-	this := Message{}
+func NewContentPartOneOfWithDefaults() *ContentPartOneOf {
+	this := ContentPartOneOf{}
 	return &this
 }
 
-// GetContent returns the Content field value
-func (o *Message) GetContent() MessageContent {
-	if o == nil {
-		var ret MessageContent
-		return ret
-	}
-
-	return o.Content
-}
-
-// GetContentOk returns a tuple with the Content field value
-// and a boolean to check if the value has been set.
-func (o *Message) GetContentOk() (*MessageContent, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Content, true
-}
-
-// SetContent sets field value
-func (o *Message) SetContent(v MessageContent) {
-	o.Content = v
-}
-
-// GetRole returns the Role field value
-func (o *Message) GetRole() string {
+// GetText returns the Text field value
+func (o *ContentPartOneOf) GetText() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Role
+	return o.Text
 }
 
-// GetRoleOk returns a tuple with the Role field value
+// GetTextOk returns a tuple with the Text field value
 // and a boolean to check if the value has been set.
-func (o *Message) GetRoleOk() (*string, bool) {
+func (o *ContentPartOneOf) GetTextOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Role, true
+	return &o.Text, true
 }
 
-// SetRole sets field value
-func (o *Message) SetRole(v string) {
-	o.Role = v
+// SetText sets field value
+func (o *ContentPartOneOf) SetText(v string) {
+	o.Text = v
 }
 
-func (o Message) MarshalJSON() ([]byte, error) {
+// GetType returns the Type field value
+func (o *ContentPartOneOf) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ContentPartOneOf) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ContentPartOneOf) SetType(v string) {
+	o.Type = v
+}
+
+func (o ContentPartOneOf) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,20 +102,20 @@ func (o Message) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Message) ToMap() (map[string]interface{}, error) {
+func (o ContentPartOneOf) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["content"] = o.Content
-	toSerialize["role"] = o.Role
+	toSerialize["text"] = o.Text
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 
-func (o *Message) UnmarshalJSON(data []byte) (err error) {
+func (o *ContentPartOneOf) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"content",
-		"role",
+		"text",
+		"type",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -133,53 +132,53 @@ func (o *Message) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varMessage := _Message{}
+	varContentPartOneOf := _ContentPartOneOf{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMessage)
+	err = decoder.Decode(&varContentPartOneOf)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Message(varMessage)
+	*o = ContentPartOneOf(varContentPartOneOf)
 
 	return err
 }
 
-type NullableMessage struct {
-	value *Message
+type NullableContentPartOneOf struct {
+	value *ContentPartOneOf
 	isSet bool
 }
 
-func (v NullableMessage) Get() *Message {
+func (v NullableContentPartOneOf) Get() *ContentPartOneOf {
 	return v.value
 }
 
-func (v *NullableMessage) Set(val *Message) {
+func (v *NullableContentPartOneOf) Set(val *ContentPartOneOf) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMessage) IsSet() bool {
+func (v NullableContentPartOneOf) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMessage) Unset() {
+func (v *NullableContentPartOneOf) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMessage(val *Message) *NullableMessage {
-	return &NullableMessage{value: val, isSet: true}
+func NewNullableContentPartOneOf(val *ContentPartOneOf) *NullableContentPartOneOf {
+	return &NullableContentPartOneOf{value: val, isSet: true}
 }
 
-func (v NullableMessage) MarshalJSON() ([]byte, error) {
+func (v NullableContentPartOneOf) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMessage) UnmarshalJSON(src []byte) error {
+func (v *NullableContentPartOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

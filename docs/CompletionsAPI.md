@@ -27,7 +27,7 @@ import (
 )
 
 func main() {
-	completionRequest := *openapiclient.NewCompletionRequest([]openapiclient.Message{*openapiclient.NewMessage("Content_example", "Role_example")}, "gpt-4", openapiclient.Provider("OpenAI")) // CompletionRequest | 
+	completionRequest := *openapiclient.NewCompletionRequest([]openapiclient.Message{*openapiclient.NewMessage(openapiclient.MessageContent{ArrayOfContentPart: new([]ContentPart)}, "Role_example")}, "gpt-4", openapiclient.Provider("OpenAI")) // CompletionRequest | 
 	xProviderApiKey := "xProviderApiKey_example" // string | Optional provider API key to override stored or system keys (optional)
 
 	configuration := openapiclient.NewConfiguration()
